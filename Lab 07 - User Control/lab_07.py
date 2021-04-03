@@ -63,6 +63,8 @@ class Knife:
         self.color = color
         self.color2 = color2
 
+        self.chrunch = arcade.load_sound("crunch.1.ogg")
+
     def draw(self):
         """ Draw the balls with the instance variables we have. """
         arcade.draw_ellipse_filled(self.position_x, self.position_y, 20, 200, self.color)
@@ -81,24 +83,28 @@ class Knife:
         if self.position_x < self.radius:
 
             self.position_x = self.radius
+            arcade.play_sound(self.chrunch)
 
 
 
         if self.position_x > SCREEN_WIDTH - self.radius:
 
             self.position_x = SCREEN_WIDTH - self.radius
+            arcade.play_sound(self.chrunch)
 
 
 
         if self.position_y < self.radius + 90:
 
             self.position_y = self.radius + 90
+            arcade.play_sound(self.chrunch)
 
 
 
         if self.position_y > SCREEN_HEIGHT - (self.radius + 390):
 
             self.position_y = SCREEN_HEIGHT - (self.radius+ 390)
+            arcade.play_sound(self.chrunch)
 
 class Fork:
     def __init__(self, position_x, position_y, change_x, change_y, width, height, color, color2):
@@ -141,6 +147,7 @@ class MyGame(arcade.Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
 
         self.set_mouse_visible(False)
+        self.space_sound = arcade.load_sound("CantStopWaiting.ogg")
 
         self.knife = Knife(50, 50, 0, 0, 15, arcade.color.BLACK, arcade.color.SILVER)
         self.fork = Fork(150, 50, 0, 0, 30, 30, arcade.color.BLACK, arcade.color.SILVER)
@@ -177,6 +184,12 @@ class MyGame(arcade.Window):
             self.knife.change_y = MOVEMENT_SPEED
         elif key == arcade.key.DOWN:
             self.knife.change_y = -MOVEMENT_SPEED
+        
+
+        # If the user hits  the space bar, play the sound that we loaded
+        if key == arcade.key.SPACE:
+
+            arcade.play_sound(self.space_sound)
 
     def on_key_release(self, key, modifiers):
         """ Called whenever a user releases a key. """
