@@ -148,6 +148,7 @@ class MyGame(arcade.Window):
 
         self.set_mouse_visible(False)
         self.space_sound = arcade.load_sound("CantStopWaiting.ogg")
+        self.laser = arcade.load_sound('Laser1.ogg')
 
         self.knife = Knife(50, 50, 0, 0, 15, arcade.color.BLACK, arcade.color.SILVER)
         self.fork = Fork(150, 50, 0, 0, 30, 30, arcade.color.BLACK, arcade.color.SILVER)
@@ -205,6 +206,12 @@ class MyGame(arcade.Window):
         self.fork.position_x = x
 
         self.fork.position_y = y
+    
+    def on_mouse_press(self, x, y, button, modifiers):
+        """ Called when the user presses a mouse button. """
+
+        if button == arcade.MOUSE_BUTTON_LEFT:
+            arcade.play_sound(self.laser)
 
 
 def main():
