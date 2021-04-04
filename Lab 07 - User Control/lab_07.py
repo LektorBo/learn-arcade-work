@@ -148,7 +148,7 @@ class MyGame(arcade.Window):
 
         self.set_mouse_visible(False)
         self.space_sound = arcade.load_sound("CantStopWaiting.ogg")
-        self.laser = arcade.load_sound('Laser1.ogg')
+        self.crunch = arcade.load_sound("crunch.1.ogg")
 
         self.knife = Knife(50, 50, 0, 0, 15, arcade.color.BLACK, arcade.color.SILVER)
         self.fork = Fork(150, 50, 0, 0, 30, 30, arcade.color.BLACK, arcade.color.SILVER)
@@ -211,7 +211,7 @@ class MyGame(arcade.Window):
         """ Called when the user presses a mouse button. """
 
         if button == arcade.MOUSE_BUTTON_LEFT:
-            arcade.play_sound(self.laser)
+            arcade.play_sound(self.crunch)
 
 
 def main():
